@@ -17,7 +17,7 @@ export default function Home() {
       <main className="bg-black text-white p-4 min-h-screen">
         <h1 className="text-3xl mb-1">kimochi apparel</h1>
         <p className="text-xl mb-1">in production</p>
-        <footer className="text-sm">&copy; 2025 kimochi</footer>
+        <footer className="text-sm">&copy; 2025 kimochi. all rights reserved.</footer>
       </main>
     </>
   );

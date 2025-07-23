@@ -7,26 +7,23 @@ export default function Home() {
   const [timeLeft, setTimeLeft] = useState('');
 
   useEffect(() => {
-    const getNextThursday = () => {
+    const getMidnightTonightCST = () => {
       const now = new Date();
-      const currentDay = now.getDay(); // 0 (Sun) to 6 (Sat)
-      const daysUntilThursday = (4 - currentDay + 7) % 7 || 7;
-      const nextThursday = new Date(now);
-      nextThursday.setDate(now.getDate() + daysUntilThursday);
-      nextThursday.setHours(0, 0, 0, 0); // Midnight CST
 
-      // Adjust to CST (UTC-6 or UTC-5 with daylight saving)
-      const offsetCST = -6 * 60;
-      const localOffset = nextThursday.getTimezoneOffset();
-      const diffMinutes = offsetCST - localOffset;
-      nextThursday.setMinutes(nextThursday.getMinutes() + diffMinutes);
+      // Get tomorrow's date
+      const midnightCST = new Date(Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate() + 1, // tomorrow
+        6, 0, 0, 0 // 12:00 AM CST is 6:00 AM UTC (CST = UTC-6)
+      ));
 
-      return nextThursday;
+      return midnightCST;
     };
 
     const updateCountdown = () => {
       const now = new Date();
-      const target = getNextThursday();
+      const target = getMidnightTonightCST();
       const diff = target.getTime() - now.getTime();
 
       if (diff <= 0) {
